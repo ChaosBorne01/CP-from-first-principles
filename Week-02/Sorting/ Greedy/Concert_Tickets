@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+int main(){
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
+ 
+    long long n{}, m{};
+    cin >> n >> m;
+ 
+    multiset<long long> a;
+    vector<long long> b(m);
+    for(auto i = 0ll; i < n; ++i){
+        long long x{};
+        cin >> x;
+        a.insert(x);
+    }
+    for(auto i = 0ll; i < m; ++i) cin >> b[i];
+ 
+ 
+    long long tickets_sold{};
+    for(auto i = 0ll; i < m; ++i){
+        if(tickets_sold < n){
+            auto it = a.upper_bound(b[i]);
+            if(it != a.begin()){
+                it--;
+                cout << *it << '\n';
+                tickets_sold++;
+                a.erase(it);
+            }
+            else cout << -1 << '\n';
+        }
+        else cout << -1 << '\n';
+    }
+}

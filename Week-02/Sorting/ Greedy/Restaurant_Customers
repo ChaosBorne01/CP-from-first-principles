@@ -1,0 +1,40 @@
+
+#include <bits/stdc++.h>
+using namespace std;
+ 
+int main(){
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
+ 
+    long long n{};
+    cin >> n;
+ 
+    vector<pair<long long, bool>> a(2*n);
+    for(auto i = 0ll; i < 2*n; ++i){
+        cin >> a[i].first;
+        a[i].second = true;
+        i++;
+        cin >> a[i].first;
+        a[i].second = false;
+    }
+ 
+    sort(a.begin(), a.end());
+ 
+    long long left_to_arrive{n};
+    long long c{}, mc{};
+ 
+    for(auto i = 0ll; i < 2*n; ++i){
+        if(mc >= (c + left_to_arrive)) break;
+ 
+        if(a[i].second == true){
+            c++;
+            left_to_arrive--;
+        }
+        else{
+            if(mc < c) mc = c;
+            c--;
+        }
+    }
+ 
+    cout << mc << '\n';
+}

@@ -1,0 +1,22 @@
+#include <bits/stdc++.h>
+using std::cout;
+using std::cin;
+using std::vector;
+using std::pair;
+using std::string;
+using std::sort;
+using std::set;
+
+int main(){
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
+
+    double n{};
+    cin >> n;
+
+    int cast_n = (int)n;
+    double d = n - cast_n;
+
+    if(d) cout << "float " << cast_n << " " << d << '\n';
+    else cout << "int " << cast_n << '\n';
+}

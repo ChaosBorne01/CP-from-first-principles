@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+using std::cout;
+using std::cin;
+using std::vector;
+using std::pair;
+using std::string;
+using std::sort;
+using std::set;
+
+int main(){
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
+
+    long long x{}, y{}, z{};
+    cin >> x >> y >> z;
+
+    vector<long long> a = {x, y ,z};
+    sort(a.begin(), a.end());
+
+    for(auto num : a) cout << num << '\n';
+    cout << '\n';
+
+    cout << x << '\n' << y << '\n' << z << '\n';
+}

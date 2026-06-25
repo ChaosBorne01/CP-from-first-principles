@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+using std::cout;
+using std::cin;
+using std::vector;
+using std::pair;
+using std::string;
+using std::sort;
+using std::set;
+ 
+int main(){
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
+ 
+    long long n{}, x{};
+    cin >> n >> x;
+ 
+    vector<long long> a(n);
+    for(auto i = 0ll; i < n; ++i) cin >> a[i];
+ 
+ 
+    long long numSubarrays{};
+    long long l{}, r{}, sum{};
+    for(auto i = 0ll; i < n; ++i){
+        sum += a[i];
+        if(sum >= x){
+            r = i;
+            break;
+        }
+    }
+ 
+    while(r < n){
+        while(sum >= x){
+            if(sum == x) numSubarrays++;
+            sum -= a[l];
+            l++;
+        }
+        while(sum < x){
+            if(r < l) r = l;
+            else r++;
+            
+            if(r >= n) break;
+            sum += a[r];
+        }
+    }
+ 
+    cout << numSubarrays << '\n';
+}

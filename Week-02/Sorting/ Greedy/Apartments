@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+using std::cout;
+using std::cin;
+using std::vector;
+using std::pair;
+using std::string;
+using std::sort;
+using std::set;
+ 
+int main(){
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
+ 
+    long long n{}, m{}, k{};
+    cin >> n >> m >> k;
+ 
+    vector<long long> a(n), b(m);
+    for(auto i = 0ll; i < n; ++i) cin >> a[i];
+    for(auto i = 0ll; i < m; ++i) cin >> b[i];
+ 
+    sort(a.begin(), a.end());
+    sort(b.begin(), b.end());
+ 
+    long long it{};
+    long long get{};
+ 
+    for(auto i = 0; i < n; ++i){
+        auto sz1{a[i] - k};
+        auto sz2{a[i] + k};
+        while(b[it] < sz1 && it < m) it++;
+        if(it >= m) break; 
+        
+        if(b[it] <= sz2){
+            get++;
+            it++;
+        }
+    }
+ 
+    cout << get << '\n';
+}
