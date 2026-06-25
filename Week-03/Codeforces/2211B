@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+using std::cout;
+using std::cin;
+using std::vector;
+using std::pair;
+using std::string;
+using std::sort;
+
+int main(){
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
+
+    int t;
+    std::cin >> t;
+    
+    while (t--){
+        long long x{}, y{};
+        cin >> x >> y;
+
+        long long d{676767677};
+
+        long long mg = std::max(x,y) - std::min(x,y);
+        long long seg{1};
+
+        long long i = 1;
+        while(true){
+            auto num{mg - i};
+            if(num < i) break;
+
+            if(num%i == 0) seg += 1;
+            i++;
+        }
+
+        cout << seg%d << '\n';
+
+        vector<long long> arr(x+y);
+        for(auto i = 0ll; i < (x+y); ++i){
+            for(; i < x; ++i) arr[i] = 1;
+            for(; i < (x+y); ++i) arr[i] = -1;
+        }
+
+        for(auto v : arr) cout << v << " ";
+        cout << '\n';
+    }
+}
+ 
