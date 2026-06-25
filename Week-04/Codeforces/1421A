@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
+
+    int t;
+    std::cin >> t;
+    
+    while (t--){
+        long long a{}, b{};
+        cin >> a >> b;
+
+        auto sum{a+b};
+
+        auto x = min(a, b);
+        long long m{1};
+
+        while(x >= m){
+            if(a%2 == b%2 && a&1) sum -= 2*m;
+            m *= 2;
+            a /=2;
+            b /=2;
+        }
+
+        cout << sum << '\n';
+    }
+}
