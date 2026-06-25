@@ -1,0 +1,13 @@
+#include <iostream>
+
+int main(){
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
+
+    char x{};
+    std::cin >> x;
+
+    if(x >= 97) std::cout << "ALPHA\nIS SMALL" << '\n';
+    else if(x >= 65) std::cout << "ALPHA\nIS CAPITAL" << '\n';
+    else std::cout << "IS DIGIT" << '\n';
+}
