@@ -1,0 +1,62 @@
+#include <bits/stdc++.h>
+using std::cout;
+using std::cin;
+using std::vector;
+using std::pair;
+using std::string;
+using std::sort;
+
+int main(){
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
+
+    int t;
+    std::cin >> t;
+    
+    while (t--){
+        long long n{};
+        cin >> n;
+
+        vector<long long> arr(n);
+        for(auto i = 0ll; i < n; ++i) cin >> arr[i];
+
+        long long k{};
+        vector<long long> pre_diff(n-1);
+        for(auto i = 0ll; i < n-1; ++i){
+            pre_diff[i] = arr[i+1] - arr[i];
+            if(i == 0) k = pre_diff[0];
+            else{
+                if(k > pre_diff[i]) k = pre_diff[i];
+            }
+        }
+
+        if(k >= 0) cout << "YES" << '\n';
+        else{
+            k = -k;
+            bool find{};
+            for(auto i =1ll; i < n; ++i){
+                if(!find){
+                    if(pre_diff[i-1] < 0){
+                        find = true;
+                        arr[i] += k;
+                    }
+                }
+                else{
+                    if(arr[i] >= arr[i-1]) find = false;
+                    else arr[i] += k;
+                }
+            }
+
+            bool check{true};
+            for(auto i = 0ll; i < n-1; ++i){
+                if(arr[i+1] - arr[i] < 0){
+                    check = false;
+                    break;
+                }
+            }
+
+            if(check) cout << "YES" << '\n';
+            else cout << "NO" << '\n';
+        }
+    }
+}
