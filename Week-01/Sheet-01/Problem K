@@ -1,0 +1,18 @@
+#include <iostream>
+
+int main(){
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
+
+    double a{}, b{}, c{};
+    std::cin >> a >> b >> c;
+
+    double min{}, max{}, x{}, y{};
+    x = (a <= b) ? a : b;
+    min = (x <= c) ? x : c;
+
+    y = (a >= b) ? a : b;
+    max = (y >= c) ? y : c;
+
+    std::cout << min << " " << max << '\n';
+}
