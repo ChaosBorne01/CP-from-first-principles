@@ -1,0 +1,23 @@
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        auto n = nums.size();
+        
+        vector<int> idx;
+        idx.reserve(2);
+
+        bool find{false};
+        for(auto i = 0; i < n; ++i){
+            for(auto j = i+1; j < n; ++j){
+                if(nums[i] + nums[j] == target){
+                    find = true;
+                    idx = {i,j};
+                    break;
+                }
+            }
+            if(find) break;
+        }
+
+        return idx;
+    }
+};
