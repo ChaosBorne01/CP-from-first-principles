@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
+
+    int t;
+    std::cin >> t;
+    
+    while (t--){
+        long long n{};
+        cin >> n;
+
+        long long a{}, b{};
+        auto r{n%12};
+        if(r < 10){
+            a = r;
+            b = n-r;
+        }
+        else if(r == 10){
+            if(n > 12){
+                a = r + 12;
+                b = n - r - 12;
+            }
+            else{
+                cout << -1 << '\n';
+                continue;
+            }
+        }
+        else{
+            a = r;
+            b = n - r;
+        }
+        cout << a << " " << b << '\n';
+    }
+}
