@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+using std::cout;
+using std::cin;
+using std::vector;
+using std::pair;
+using std::string;
+
+long long min_steps(long long m, long long n, long long x){
+    long long op1{m-n};
+    long long op{};
+
+    if(m != n){
+        long long op2{}, op3{}, m1{m}, m2{m};
+        while(m1/x > n){
+            m1 /= x;
+            op3++;
+        }
+
+        while(m2 > n){
+            m2 /= x;
+            op2 ++;
+        }
+
+        op3 += m1-n;
+        op2 += min_steps(n,m2,x);
+
+        op = std::min(op2, op3);
+        op = std::min(op, op1);
+    }
+    return op;
+}
+
+int main(){
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
+
+    int t;
+    std::cin >> t;
+    
+    while (t--){
+        long long a{}, b{}, x{};
+        cin >> a >> b >> x;
+
+        auto m{std::max(a, b)};
+        auto n{std::min(a, b)};
+
+        long long op = min_steps(m,n,x);
+
+        cout << op << '\n';
+    }
+}
