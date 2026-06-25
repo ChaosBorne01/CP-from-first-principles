@@ -1,0 +1,19 @@
+#include <iostream>
+
+int main(){
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
+
+    double x{}, y{};
+    std::cin >> x >> y;
+    
+    std::cout << "floor " << x << " / " << y << " = " << (int)(x/y) << '\n';
+
+    if(x/y == (int)(x/y)) std::cout << "ceil " << x << " / " << y << " = " << (int)(x/y) << '\n';
+    else std::cout << "ceil " << x << " / " << y << " = " << (int)(x/y) + 1 << '\n';
+
+    int r{};
+    if(x/y >= (int)(x/y) + 0.5) r = (int)(x/y) + 1;
+    else r = (int)(x/y);
+    std::cout << "round " << x << " / " << y << " = " << r << '\n';
+}
