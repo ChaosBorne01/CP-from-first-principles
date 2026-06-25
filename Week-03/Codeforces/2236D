@@ -1,0 +1,57 @@
+#include <bits/stdc++.h>
+using std::cout;
+using std::cin;
+using std::vector;
+using std::pair;
+using std::string;
+using std::sort;
+
+int main(){
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
+
+    int t;
+    std::cin >> t;
+    
+    while (t--){
+        long long n{}, k{};
+        cin >> n >> k;
+
+        vector<long long> arr(n);
+        for(auto i = 0; i < n; ++i) cin >> arr[i];
+
+        std::sort(arr.begin(), arr.end());
+        
+        vector<long long> cc, diff;
+
+        long long tmp{arr[n-1]}, c{1};
+        for(auto i = n-2; i >= 0; i--){
+            if(arr[i] == tmp) c++;
+            else{
+                cc.push_back(c);
+                long long d{tmp - arr[i]};
+                diff.push_back(d);
+                c = 1;
+                tmp = arr[i];
+            }
+        }
+        cc.push_back(c);
+        
+        for(auto i = 0; i < cc.size(); ++i){
+            if(!(cc[i] & 1)){
+                cout << "YES" << '\n';
+                break;
+            }
+            else{
+                if(i != cc.size()-1){
+                    if(diff[i] <= k){
+                        cout << "YES" << '\n';
+                        break;
+                    }
+                    else continue;
+                }
+                else cout << "NO" << '\n';
+            }
+        }
+    }
+}
