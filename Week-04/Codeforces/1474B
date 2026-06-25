@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void getPrime(long long lim, vector<long long> &prime){
+    vector<bool> isPrime(lim+1, true);
+    isPrime[0] = false;
+    isPrime[1] = false;
+
+    for(auto i = 2; i*i < lim+1; ++i){
+        if(isPrime[i]){
+            for(auto j = i*i; j < lim+1; j += i) isPrime[j] = false;
+        }
+    }
+    
+    for(auto i = 2ll; i < lim+1; ++i){
+        if(isPrime[i]){
+            prime.push_back(i);
+        }
+    }
+}
+
+int main(){
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
+
+    long long lim{200000};
+
+    vector<long long> prime;
+    prime.reserve(lim);
+
+    getPrime(lim, prime);
+
+    int t;
+    std::cin >> t;
+    
+    while (t--){
+        long long d{};
+        cin >> d;
+
+        long long idx1{}, idx2{};
+        while(prime[idx1] < (d+1)) idx1++;
+        idx2 = idx1;
+        while(prime[idx2] < (d+prime[idx1])) idx2++;
+
+        cout << prime[idx1]*prime[idx2] << '\n';
+    }
+}
