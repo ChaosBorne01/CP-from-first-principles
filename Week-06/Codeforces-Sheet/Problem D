@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void seperate(int n, long long d){
+    if(d == 0){
+        cout << '\n';
+        return;
+    }
+    cout << n/d << " ";
+    seperate(n%d, d/10);
+}
+
+int main(){
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
+
+    int t;
+    std::cin >> t;
+    
+    while (t--){
+        int n{};
+        cin >> n;
+
+        long long d{1};
+        while(n%(d*10) != n) d *= 10;
+        seperate(n,d);
+    }
+}

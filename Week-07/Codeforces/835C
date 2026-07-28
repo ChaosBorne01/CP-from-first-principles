@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define SIZE 200002
+
+int main(){
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
+
+    int n{}, q{}, c{};
+    cin >> n >> q >> c;
+
+    vector<vector<pair<bool,vector<int>>>> stars(101, vector<pair<bool,vector<int>>> (101));
+    while(n--){
+        int x{}, y{}, b{};
+        cin >> x >> y >> b;
+
+        stars[x][y].first = true;
+        stars[x][y].second.push_back(b);
+    }
+
+    vector<vector<vector<int>>> total_brightness(c+1, (vector<vector<int>> (101, vector<int> (101))));
+    for(int i = 0; i < c+1; ++i){
+        for(int j = 1; j < 101; ++j){
+            for(int k = 1; k < 101; ++k){
+                total_brightness[i][j][k] = total_brightness[i][j-1][k] + total_brightness[i][j][k-1] - total_brightness[i][j-1][k-1];
+                if(stars[j][k].first){
+                    const auto &vec = stars[j][k].second;
+                    for(auto& val : vec) total_brightness[i][j][k] += (val + i)%(c+1);
+                } 
+            }
+        }
+    }
+
+    while(q--){
+        int t{}, x1{}, y1{}, x2{}, y2{};
+        cin >> t >> x1 >> y1 >> x2 >> y2;
+
+        t %= (c+1);
+        cout << total_brightness[t][x2][y2] + total_brightness[t][x1-1][y1-1] - total_brightness[t][x1-1][y2] - total_brightness[t][x2][y1-1] << '\n';
+    }
+}
