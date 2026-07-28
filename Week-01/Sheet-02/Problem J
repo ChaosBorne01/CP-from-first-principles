@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Grades{
+    string name;
+    int total_score;
+    int a;
+    int m;
+    int s;
+    int e;
+};
+
+int main(){
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
+
+    int n{};
+    cin >> n;
+
+    vector<Grades> scores(n);
+    for(auto &student : scores){
+        cin >> student.name >> student.a >> student.m >> student.s >> student.e;
+        student.total_score = student.a + student.e + student.m + student.s;
+    }
+
+    sort(scores.begin(), scores.end(), [](const Grades&a, const Grades& b){
+        if(a.total_score != b.total_score) return a.total_score > b.total_score;
+        return a.name < b.name;
+    });
+
+    for(auto &student : scores){
+        cout << student.name << " " << student.total_score << " " << student.a << " " << student.m << " " << student.s << " " << student.e << '\n';
+    }
+}

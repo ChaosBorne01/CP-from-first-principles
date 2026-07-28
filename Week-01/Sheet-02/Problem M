@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
+
+    int n{}, q{};
+    cin >> n >> q;
+
+    vector<int> a(n);
+    for(int i = 0; i < n; ++i) cin >> a[i];
+
+    vector<int> x(q);
+    for(int i = 0; i < q; ++i) cin >> x[i];
+
+    vector<int> s = x;
+    vector<pair<int,int>> d(100001);
+
+    sort(a.begin(), a.end());
+    sort(s.begin(), s.end());
+
+    a.erase((unique(a.begin(), a.end())), a.end());
+    auto sz{a.size()};
+
+    int idx = 0;
+    for(int i = 0; i < q; ++i){
+        auto tmp{s[i]};
+        while(idx < sz){
+            if(tmp > a[idx]) idx++;
+            else if(tmp == a[idx]){
+                d[tmp].first = idx;
+                d[tmp].second = sz - (idx+1);
+                break;
+            }
+            else{
+                d[tmp].first = idx; 
+                d[tmp].second = sz - idx;
+                break;
+            }
+        }
+        if(idx == sz){
+            d[tmp].first = sz;
+            d[tmp].second = 0;
+        }
+    }
+
+    for(int i = 0; i < q; ++i) cout << d[x[i]].first << " " << d[x[i]].second << '\n';
+}

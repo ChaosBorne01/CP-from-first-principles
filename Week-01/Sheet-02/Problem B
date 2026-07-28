@@ -1,0 +1,21 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
+
+    string s;
+    cin >> s;
+
+    vector<int> ascii(128);
+
+    for(auto & c : s) ascii[c]++;
+
+    for(int i = 65; i < 128; ++i){
+        if(ascii[i]){
+            char c = i;
+            cout << c << " " << ascii[i] << '\n';
+        }
+    }
+}

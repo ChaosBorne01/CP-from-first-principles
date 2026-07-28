@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
+
+    int n{}, k{};
+    cin >> n >> k;
+
+    vector<int> a(n);
+    for(int i = 0; i < n; ++i) cin >> a[i];
+
+    unordered_map<int, vector<int>> indices;
+    indices.rehash(101);
+
+    for(int i = 0; i < n; ++i) indices[a[i]].push_back(i+1);
+
+    if(indices.size() < k) cout << "NO\n";
+    else{
+        cout << "YES\n";
+
+        int students{};
+        for(const auto& pair : indices){
+            if(students == k) break;
+
+            cout << pair.second[0] << " ";
+            students++;
+        }
+        cout << '\n';
+    }
+}
