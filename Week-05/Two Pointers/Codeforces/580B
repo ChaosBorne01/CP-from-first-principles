@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+struct COMPANY{
+    int money{};
+    int ff{};
+};
+
+int main(){
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
+
+    int n{}, d{};
+    cin >> n >> d;
+
+    vector<COMPANY> friends(n);
+    for(auto& val : friends){
+        cin >> val.money;
+        cin >> val.ff;
+    }
+
+    sort(friends.begin(), friends.end(), [](const COMPANY& a, const COMPANY& b){
+        if(a.money == b.money) return a.ff > b.ff;
+        return a.money < b.money;
+    });
+
+    int l{}, r{-1};
+    long long tff{}, mtff{};
+
+    while((r+1) < n && (friends[r+1].money - friends[l].money) < d){
+        r++;
+        tff += friends[r].ff;
+    }
+
+    mtff = max(mtff, tff);
+
+    while(r < n-1){
+        tff -= friends[l].ff;
+        l++;
+
+        while((r+1) < n && (friends[r+1].money - friends[l].money) < d){
+            r++;
+            tff += friends[r].ff;
+        }
+
+        mtff = max(mtff, tff);
+    }
+
+    cout << mtff << '\n';
+}

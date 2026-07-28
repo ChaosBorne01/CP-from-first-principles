@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+struct COMPANY{
+    int money{};
+    int ff{};
+};
+
+int main(){
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
+
+    int n{}, m{};
+    cin >> n >> m;
+
+    vector<int> a(n), b(m);
+    for(auto& val : a) cin >> val;
+    for(auto& val : b) cin >> val;
+
+    int s{};
+    int l{}, r{};
+    for(int i = 0; i < n; ++i){
+        if(b[r] < a[i]){
+            l = r;
+            while((l+1) < m && b[l+1] <= a[i]) l++;
+
+            if(b[l] == a[i]) r = l;
+            else r = l+1;
+            if(r == m) r--;
+        }
+        else if(b[r] == a[i]) l = r;
+
+        int d1{a[i] - b[l]};
+        int d2{b[r] - a[i]};
+        
+        int d{};
+        if(d1 < 0) d = d2;
+        else if(d2 < 0) d = d1;
+        else d = min(d1, d2);
+
+        s = max(s, d);
+    }
+
+    cout << s << '\n';
+}
